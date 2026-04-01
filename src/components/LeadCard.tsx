@@ -13,6 +13,7 @@ const STATUS_OPTIONS: { value: LeadStatus; label: string }[] = [
   { value: 'contacted', label: 'Contacted' },
   { value: 'quoted', label: 'Quoted' },
   { value: 'won', label: 'Won ✅' },
+  { value: 'completed', label: 'Job Done ⭐' },
   { value: 'lost', label: 'Lost' },
   { value: 'dead', label: 'Dead' },
 ];
