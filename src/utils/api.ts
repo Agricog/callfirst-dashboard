@@ -43,7 +43,7 @@ export async function fetchSettings(): Promise<ClientSettings> {
   return apiFetch<ClientSettings>('/api/dashboard/settings');
 }
 
-export async function updateSettings(settings: Partial<Pick<ClientSettings, 'urgencyMode' | 'discountPercent'>>): Promise<void> {
+export async function updateSettings(settings: Partial<Pick<ClientSettings, 'urgencyMode' | 'discountPercent' | 'priceGuidance'>>): Promise<void> {
   await apiFetch('/api/dashboard/settings', {
     method: 'PATCH',
     body: JSON.stringify(settings),
