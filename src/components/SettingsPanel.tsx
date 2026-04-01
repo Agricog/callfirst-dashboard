@@ -10,6 +10,7 @@ interface SettingsPanelProps {
 export default function SettingsPanel({ settings, onUpdate }: SettingsPanelProps) {
   const [urgency, setUrgency] = useState(settings.urgencyMode);
   const [discount, setDiscount] = useState(settings.discountPercent);
+  const [priceGuide, setPriceGuide] = useState(settings.priceGuidance);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -17,7 +18,11 @@ export default function SettingsPanel({ settings, onUpdate }: SettingsPanelProps
     setIsSaving(true);
     setSaved(false);
     try {
-      await updateSettings({ urgencyMode: urgency, discountPercent: discount });
+      await updateSettings({
+        urgencyMode: urgency,
+        discountPercent: discount,
+        priceGuidance: priceGuide,
+      });
       setSaved(true);
       onUpdate();
       setTimeout(() => setSaved(false), 2000);
@@ -77,6 +82,21 @@ export default function SettingsPanel({ settings, onUpdate }: SettingsPanelProps
           <span>25%</span>
           <span>50%</span>
         </div>
+      </div>
+
+      {/* Price guidance editor */}
+      <div>
+        <p className="text-sm font-medium text-slate-700 mb-1">Price Guide</p>
+        <p className="text-xs text-slate-500 mb-2">
+          The AI uses these to give customers rough estimates. Write them in plain English.
+        </p>
+        <textarea
+          value={priceGuide}
+          onChange={(e) => setPriceGuide(e.target.value)}
+          rows={4}
+          placeholder="e.g. Chimney £450-700, gable end £500-750, full house £1500-3000"
+          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-action focus:border-transparent resize-none"
+        />
       </div>
 
       {/* Save button */}
