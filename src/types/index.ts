@@ -20,6 +20,7 @@ export interface ClientSettings {
   area: string;
   urgencyMode: boolean;
   discountPercent: number;
+  priceGuidance: string;
 }
 
 export type LeadStatus = DashboardLead['status'];
