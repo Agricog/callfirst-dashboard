@@ -9,7 +9,7 @@ export interface DashboardLead {
   leadScore: 'hot' | 'warm' | 'cold';
   area: string;
   suggestedOpener: string;
-  status: 'new' | 'contacted' | 'quoted' | 'won' | 'lost' | 'dead';
+  status: 'new' | 'contacted' | 'quoted' | 'won' | 'lost' | 'dead' | 'completed';
   createdAt: string;
 }
 
