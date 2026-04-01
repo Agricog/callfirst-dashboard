@@ -66,7 +66,7 @@ export default function LeadCard({ lead, onStatusChange }: LeadCardProps) {
           <span className="text-slate-600">{lead.propertyType}</span>
         </div>
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-slate-400">💰</span>
+          <span className="text-slate-400">💷</span>
           <span className="text-slate-600">{lead.estimatedValue}</span>
         </div>
         <div className="flex items-center gap-2 text-sm">
