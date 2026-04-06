@@ -1,14 +1,29 @@
 import type { DashboardLead, ClientSettings, LeadStatus } from '../types/index.js';
 
 const API_URL = import.meta.env.VITE_API_URL as string;
-const API_KEY = import.meta.env.VITE_API_KEY as string;
+
+let getTokenFn: (() => Promise<string | null>) | null = null;
+
+export function setGetToken(fn: () => Promise<string | null>): void {
+  getTokenFn = fn;
+}
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  if (!getTokenFn) {
+    throw new Error('Auth not initialised');
+  }
+
+  const token = await getTokenFn();
+
+  if (!token) {
+    throw new Error('Not signed in');
+  }
+
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${token}`,
       ...options?.headers,
     },
   });
