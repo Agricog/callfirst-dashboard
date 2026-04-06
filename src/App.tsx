@@ -1,5 +1,17 @@
-import { SignedIn, SignedOut, SignIn, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignIn, UserButton, useAuth } from '@clerk/clerk-react';
+import { useEffect } from 'react';
 import Dashboard from './components/Dashboard.js';
+import { setGetToken } from './utils/api.js';
+
+function AuthInit() {
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    setGetToken(() => getToken());
+  }, [getToken]);
+
+  return null;
+}
 
 export default function App() {
   return (
@@ -23,6 +35,7 @@ export default function App() {
         </div>
       </SignedOut>
       <SignedIn>
+        <AuthInit />
         <div className="fixed top-2.5 right-14 z-20">
           <UserButton
             afterSignOutUrl="/"
